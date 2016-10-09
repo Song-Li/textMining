@@ -16,14 +16,12 @@ map<string, string> PreProcess::jsonToMap(string json) {
       name = 1;
       ret[key] = value;
       ++ i;
-      cout << '!' << key << ' ' << value <<'!'<< endl;
       key = "";
       value = "";
       continue;
     }
     if((json[i] == '\"' || json[i] == '[') && json[i - 1] != '\\') {
-      ++ i;
-      while( !((json[i] == '"' || json[i] == ']' )&& json[i - 1] != '\\') ) {
+      while( !((json[i] == '"' || json[i] == ']' ) &&  i && json[i - 1] != '\\') ) {
         if(name) key += json[i];
         else value += json[i];
         ++ i;
@@ -45,10 +43,10 @@ vector<map<string, string> > PreProcess::readJsonFile(string file_name) {
     return ret;
   }
   string input_string;
-  if(getline(input_stream, input_string)) ret.push_back(jsonToMap(input_string));    
-  return ret;
   while(getline(input_stream, input_string)) {
     ret.push_back(jsonToMap(input_string));    
+    input_string = "";
   }
+  cout << ret.size() << " lines of data imported" <<endl;
   return ret;
 }
