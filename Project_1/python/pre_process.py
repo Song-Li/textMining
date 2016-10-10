@@ -1,11 +1,9 @@
-import nltk
 import json
+from FileOperations import FileOperations 
 
-class PreProcess:
-    def __init__():
-        pass
+fo = FileOperations("../input.json")
+fo.normalize()
+fo.get_json()
+fo.tokenize()[0]
+print fo.get_freq_dist().most_common(20)
 
-    def read_json_file(file_name):
-        return json.dumps(file_name)
-
-    def 
