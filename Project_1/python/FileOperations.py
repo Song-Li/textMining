@@ -27,11 +27,13 @@ class FileOperations:
     def tokenize(self):
         print "Tokenizing..."
         self.tokens = []
+        self.all = []
         stop = stopwords.words('english')
         
         tokenizer = RegexpTokenizer(r'\w+')
         for line in self.jsons:
             self.tokens.append([words for words in tokenizer.tokenize(line['reviewtext']) if words not in stop])
+        self.all_tokens = list(set(word for words in self.tokens for word in words))
         return self.tokens
 
     def get_freq_dist(self):
@@ -39,5 +41,8 @@ class FileOperations:
         self.freq_dist = nltk.FreqDist(word for words in self.tokens for word in words)
         return self.freq_dist
 
-
-
+    def get_line_rate(self, n):
+        fdist = nltk.FreqDist(word for word in self.tokens[n])
+        print self.jsons[n]
+        for word in self.tokens[n]:
+            print self.all_tokens.index(word), float(fdist[word]) / float(self.freq_dist[word])
