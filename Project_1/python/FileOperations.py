@@ -22,8 +22,9 @@ class FileOperations:
         lines = self.text.split('\n');
         for line in lines:
             try:
-                self.jsons.append(json.loads(line))
-                self.reviews.append(json.loads(line)['reviewtext'])
+                curr = json.loads(line)
+                self.jsons.append(curr)
+                self.reviews.append(curr['reviewtext'] + ' ' + curr['summary'])
             except:
                 pass
         self.num_lines = len(self.jsons)
