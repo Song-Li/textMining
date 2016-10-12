@@ -8,7 +8,7 @@ fo.normalize()
 fo.get_json()
 #tokens = fo.tokenize()
 #clf.fit(X,y)
-split = fo.num_lines / 100 * 90
+split = fo.num_lines / 100 * 80
 data = fo.get_tfidf()
 lable = fo.get_value()
 
