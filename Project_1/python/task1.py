@@ -7,13 +7,19 @@ fo = FileOperations("../input.json")
 fo.normalize()
 fo.get_json()
 #tokens = fo.tokenize()
-fo.get_tfidf()
-
-#print fo.get_freq_dist()
-#fo.get_all_rate()
-#line = fo.rate_table[0]
-#for word in line:
-#    if word != 0:
-#        print word
-#clf = MultinomialNB()
 #clf.fit(X,y)
+split = fo.num_lines / 100 * 90
+data = fo.get_tfidf()
+lable = fo.get_value()
+
+train_data = data[:split]
+train_lable = lable[:split]
+test_data = data[split:]
+test_lable = lable[split:]
+
+clf_bayes = fo.train_bayes_model(train_data,train_lable)
+fo.score(clf_bayes, test_data, test_lable)
+
+clf_rocchio = fo.train_rocchio_model(train_data,train_lable)
+fo.score(clf_rocchio, test_data, test_lable)
+
