@@ -24,9 +24,10 @@ class FileOperations:
             try:
                 curr = json.loads(line)
                 self.jsons.append(curr)
-                self.reviews.append(curr['reviewtext'] + ' ' + curr['summary'])
+                self.reviews.append(curr['reviewText'] + ' ' + curr['summary'])
             except:
                 pass
+
         self.num_lines = len(self.jsons)
         return self.jsons
 

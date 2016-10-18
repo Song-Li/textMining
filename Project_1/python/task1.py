@@ -4,8 +4,8 @@ from sklearn.naive_bayes import MultinomialNB
 import scipy
 
 fo = FileOperations("../input.json")
-fo.normalize()
 fo.get_json()
+#fo.normalize()
 #tokens = fo.tokenize()
 #clf.fit(X,y)
 split = fo.num_lines / 100 * 80
