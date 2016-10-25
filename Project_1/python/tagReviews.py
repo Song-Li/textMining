@@ -10,7 +10,15 @@ import os
 os.environ['CLASSPATH']='/home/sol315/Downloads/stanford-postagger-2015-12-09/stanford-postagger.jar'
 os.environ['STANFORD_MODELS']='./models/english-left3words-distsim.tagger'
 
-fo = FileOperations("taged.data")
-tages = fo.get_taged_data()
-
-
+fo = FileOperations("../input.json")
+fo.get_json()
+st = StanfordPOSTagger('english-bidirectional-distsim.tagger')
+f = open('taged.data', 'a')
+cur = 0
+for line in fo.reviews:
+    cur += 1
+    print cur, cur * 100 / fo.num_lines, '%'
+    res = st.tag(line.split())
+    json_tag = json.dumps(res)
+    f.write(json_tag)
+    f.write('\n')

@@ -30,6 +30,15 @@ class FileOperations:
 
         self.num_lines = len(self.jsons)
         return self.jsons
+    
+    def get_taged_data(self):
+        self.tags = []
+        lines = self.text.split('\n')
+        for line in lines: 
+            if len(line) == 0:
+                continue
+            self.tags.append(json.loads(line) )
+        return self.tags
 
     def normalize(self):
         print "Normalizing..."

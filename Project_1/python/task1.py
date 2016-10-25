@@ -18,9 +18,13 @@ test_data = data[split:]
 test_lable = lable[split:]
 
 clf_bayes = fo.train_bayes_model(train_data,train_lable)
-print fo.score(clf_bayes, test_data, test_lable)
+TP, FP, FN, TN = fo.score(clf_bayes, test_data, test_lable)
+print "Accuricy: " , float(TP + TN) / float(TP + FP + FN + TN)
+print "Call back: " , float(TP) / float(TP + TN) 
 
 clf_rocchio = fo.train_rocchio_model(train_data,train_lable)
-print fo.score(clf_rocchio, test_data, test_lable)
+TP, FP, FN, TN = fo.score(clf_rocchio, test_data, test_lable)
+print "Accuricy: " , float(TP + TN) / float(TP + FP + FN + TN)
+print "Call back: " , float(TP) / float(TP + TN) 
 
 
