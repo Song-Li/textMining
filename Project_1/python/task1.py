@@ -18,8 +18,9 @@ test_data = data[split:]
 test_lable = lable[split:]
 
 clf_bayes = fo.train_bayes_model(train_data,train_lable)
-fo.score(clf_bayes, test_data, test_lable)
+print fo.score(clf_bayes, test_data, test_lable)
 
 clf_rocchio = fo.train_rocchio_model(train_data,train_lable)
-fo.score(clf_rocchio, test_data, test_lable)
+print fo.score(clf_rocchio, test_data, test_lable)
+
 

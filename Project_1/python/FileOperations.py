@@ -66,7 +66,21 @@ class FileOperations:
 
     def score(self, clf, X, y):
         print "Predicting..."
-        print clf.score(X,y)
+        res = clf.predict(X)
+        TP = 0
+        FP = 0
+        FN = 0
+        TN = 0
+        for i in range(len(res)):
+            if 1 == y[i] and res[i] == 1:
+                TP += 1;
+            elif res[i] == 1 and y[i] == 0:
+                FP += 1;
+            elif res[i] == 0 and y[i] == 1:
+                FN += 1;
+            elif res[i] == 0 and y[i] == 0:
+                TN += 1;
+        return TP, FP, FN, TN
 
     def train_rocchio_model(self, X, y):
         print "Training Rocchio model..."
