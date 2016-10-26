@@ -16,6 +16,9 @@ os.environ['STANFORD_MODELS']='./models/english-left3words-distsim.tagger'
 fo = FileOperations("taged.data")
 tages = fo.get_taged_data()
 
+origin = FileOperations("../input.json")
+origin.get_json()
+
 stop = set(stopwords.words('english'))
 
 pairs = dict()
@@ -36,8 +39,10 @@ for line in tages:
 
 attributes = sorted(attributes.items(), key = operator.itemgetter(1), reverse = True)[:50]
 attributes = [attr[0] for attr in attributes]
+sentence = dict()
 
-for line in tages:
+for i in range(len(tages)):
+    line = tages[i]
     for tag in line:
         if tag[0] not in attributes:
             continue
@@ -53,8 +58,10 @@ for line in tages:
                             pairs[pair] += 1
                         else:
                             pairs[pair] = 1
+                        if pair not in sentence:
+                            sentence[pair] = origin.reviews[i]
 
 pairs = sorted(pairs.items(), key = operator.itemgetter(1), reverse = True)
 
-for pair in pairs:
-    print pair
+for pair in pairs[:50]:
+    print '(' + pair[0] +'),1,"' + sentence[pair[0]]  + '"'
