@@ -34,5 +34,5 @@ for line in tages:
 
 attributes = sorted(attributes.items(), key = operator.itemgetter(1), reverse = True)
 
-for attribute in attributes:
-    print attribute
+for attribute in attributes[:50]:
+    print attribute[0] + ',' + str(attribute[1])
