@@ -43,7 +43,8 @@ sentence = dict()
 
 for i in range(len(tages)):
     line = tages[i]
-    for tag in line:
+    for j in range(len(line)):
+        tag = line[j]
         if tag[0] not in attributes:
             continue
         if tag[1] == 'NN' or tag[1] == 'NNS':
@@ -51,15 +52,24 @@ for i in range(len(tages)):
             if tag[0] in stop or len(tag[0]) <= 1:
                 tag[1] = 'STOP'
             else:
-                for tagJJ in line:
+                dis = 1e5
+                res = -1
+                for k in range(len(line)):
+                    tagJJ = line[k]
                     if tagJJ[1] == 'JJ' and tagJJ[0] != 'other':# or tagJJ[1] == 'JJR' or tagJJ[1] == 'JJS':
-                        pair = tag[0] + ',' + tagJJ[0]
-                        if pair in pairs:
-                            pairs[pair] += 1
-                        else:
-                            pairs[pair] = 1
-                        if pair not in sentence:
-                            sentence[pair] = origin.reviews[i]
+                        if abs(k - j) < dis:
+                            res = k
+                            dis = abs(k - j)
+
+                if res != -1:
+                    tagJJ = line[res]
+                    pair = tag[0] + ',' + tagJJ[0]
+                    if pair in pairs:
+                        pairs[pair] += 1
+                    else:
+                        pairs[pair] = 1
+                    if pair not in sentence:
+                        sentence[pair] = origin.reviews[i]
 
 pairs = sorted(pairs.items(), key = operator.itemgetter(1), reverse = True)
 
