@@ -25,6 +25,7 @@ pairs = dict()
 attributes = dict()
 regex = re.compile('[^a-zA-Z]')
 
+#this for loop is only used for get the attributes of task 2
 for line in tages:
     for tag in line:
         if tag[1] == 'NN' or tag[1] == 'NNS':
@@ -36,9 +37,11 @@ for line in tages:
             else:
                 attributes[tag[0]] = 1;
 
-
+#sort the attributes and keep the first 50
 attributes = sorted(attributes.items(), key = operator.itemgetter(1), reverse = True)[:50]
+#remove the number
 attributes = [attr[0] for attr in attributes]
+
 sentence = dict()
 
 for i in range(len(tages)):
@@ -56,6 +59,7 @@ for i in range(len(tages)):
                 res = -1
                 for k in range(len(line)):
                     tagJJ = line[k]
+                    #only keep the nearest JJ. The distance will be abs(k - j)
                     if tagJJ[1] == 'JJ' and tagJJ[0] != 'other':# or tagJJ[1] == 'JJR' or tagJJ[1] == 'JJS':
                         if abs(k - j) < dis:
                             res = k

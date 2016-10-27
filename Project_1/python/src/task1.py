@@ -4,15 +4,17 @@ from sklearn.naive_bayes import MultinomialNB
 import scipy
 import time
 
-fo = FileOperations("../input.json")
+fo = FileOperations("../../input.json")
 fo.get_json()
 #fo.normalize()
 #tokens = fo.tokenize()
-#clf.fit(X,y)
+
+#get the tf_idf data and label
 split = fo.num_lines / 100 * 80
 data = fo.get_tfidf()
 lable = fo.get_value()
 
+#split the data to 80% and 20%
 train_data = data[:split]
 train_lable = lable[:split]
 test_data = data[split:]

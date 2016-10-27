@@ -15,6 +15,7 @@ class FileOperations:
         f = open(file_name, 'r')
         self.text = f.read()
 
+    #read the json file
     def get_json(self):
         print "Loading json..."
         self.jsons = []
@@ -46,7 +47,7 @@ class FileOperations:
 
     def tokenize(self, raw):
         stemmer = PorterStemmer()
-        tokenizer = RegexpTokenizer(r'\w+')
+        tokenizer = RegexpTokenizer(r'\w+') #only alpha letters accepted
         tokens = tokenizer.tokenize(raw)
         stems = [stemmer.stem(word) for word in tokens]
         return stems
